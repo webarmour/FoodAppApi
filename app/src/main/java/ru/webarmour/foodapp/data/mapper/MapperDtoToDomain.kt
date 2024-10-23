@@ -6,8 +6,9 @@ import ru.webarmour.foodapp.data.network.dto.MealDto
 import ru.webarmour.foodapp.domain.model.MealByCategory
 import ru.webarmour.foodapp.domain.model.MealItem
 import ru.webarmour.foodapp.domain.model.CategoryItem
+import javax.inject.Inject
 
-class MapperDtoToDomain {
+class MapperDtoToDomain @Inject constructor() {
 
 
     fun mapDtoMealToDomain(mealDto: MealDto) = MealItem(

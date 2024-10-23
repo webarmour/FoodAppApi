@@ -128,27 +128,6 @@ class MainViewModel(
         }
     }
 
-    fun getRandomMeal() {
-        viewModelScope.launch {
-            try {
-                val response = RetrofitInstance.api.getRandomMeal()
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccessful && response.body() != null) {
-                        val meal = response.body()!!.meals.first()
-                        val mapped = mapper.mapDtoMealToDomain(meal)
-                        _randomMealLiveData.value = mapped
-                    } else {
-                        return@withContext
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.d("TEST_TAG", "Failure: ${e.message}")
-                }
-            }
-        }
-    }
-
     private fun getRandomCategory(): String {
         return listOf(
             "Seafood",
