@@ -1,9 +1,10 @@
 package ru.webarmour.foodapp.domain.usecase
 
 import ru.webarmour.foodapp.domain.MealRepository
+import javax.inject.Inject
 
-class GetRandomMealUseCase(private val mealRepository: MealRepository) {
+class GetRandomMealUseCase @Inject constructor(private val mealRepository: MealRepository) {
 
 
-    operator fun invoke() = mealRepository.getRandomMeal()
+    suspend operator fun invoke() = mealRepository.getRandomMeal()
 }
