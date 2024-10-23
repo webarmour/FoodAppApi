@@ -20,15 +20,17 @@ class MealRepositoryImpl @Inject constructor(
        return try {
            val response = RetrofitInstance.api.getRandomMeal()
            if (response.isSuccessful){
+               Log.d("RetrofitLog", "${response.body()?.meals}")
                val meals = response.body()?.meals ?: emptyList()
                mapperDtoToDomain.mapListDtoMealToDomain(meals)
+
            } else {
-               Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+               Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                emptyList()
            }
 
        } catch (e: Exception){
-           Log.d("Retrofit error", "${e.message}")
+           Log.d("RetrofitLog", "${e.message}")
            emptyList()
        }
     }
@@ -41,11 +43,11 @@ class MealRepositoryImpl @Inject constructor(
                 val meals = response.body()?.categories ?: emptyList()
                 mapperDtoToDomain.mapListCategoriesDtoToDomain(meals)
             } else {
-                Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+                Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                 emptyList()
             }
         } catch (e: Exception){
-            Log.d("Retrofit error", "${e.message}")
+            Log.d("RetrofitLog", "${e.message}")
             emptyList()
         }
     }
@@ -57,11 +59,11 @@ class MealRepositoryImpl @Inject constructor(
                 val meals = response.body()?.meals ?: emptyList()
                 mapperDtoToDomain.mapCategoryListDtoToDomain(meals)
             } else {
-                Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+                Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                 emptyList()
             }
         } catch (e: Exception){
-            Log.d("Retrofit error", "${e.message}")
+            Log.d("RetrofitLog", "${e.message}")
             emptyList()
         }
     }
@@ -73,11 +75,11 @@ class MealRepositoryImpl @Inject constructor(
                 val meals = response.body()?.meals ?: emptyList()
                 mapperDtoToDomain.mapCategoryListDtoToDomain(meals)
             } else {
-                Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+                Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                 emptyList()
             }
         } catch (e: Exception){
-            Log.d("Retrofit error", "${e.message}")
+            Log.d("RetrofitLog", "${e.message}")
             emptyList()
         }
     }
@@ -89,11 +91,11 @@ class MealRepositoryImpl @Inject constructor(
                 val meals = response.body()?.meals ?: emptyList()
                 mapperDtoToDomain.mapListDtoMealToDomain(meals).first()
             } else {
-                Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+                Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                return throw Exception("Unknown item")
             }
         } catch (e: Exception){
-            Log.d("Retrofit error", "${e.message}")
+            Log.d("RetrofitLog", "${e.message}")
             throw Exception(e)
         }
     }
@@ -105,11 +107,11 @@ class MealRepositoryImpl @Inject constructor(
                 val meals = response.body()?.meals ?: emptyList()
                 mapperDtoToDomain.mapListDtoMealToDomain(meals)
             } else {
-                Log.d("Retrofit error", "${response.message()} ${response.errorBody()}")
+                Log.d("RetrofitLog", "${response.message()} ${response.errorBody()}")
                 return throw Exception("Unknown item")
             }
         } catch (e: Exception){
-            Log.d("Retrofit error", "${e.message}")
+            Log.d("RetrofitLog", "${e.message}")
             throw Exception(e)
         }
 

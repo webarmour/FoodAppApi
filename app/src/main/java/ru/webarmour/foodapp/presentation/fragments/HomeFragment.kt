@@ -74,6 +74,7 @@ class HomeFragment : Fragment() {
 
     private fun refreshDataOnLifecycle() {
         lifecycleScope.launch {
+            viewModel.getRandomMeal()
             viewModel.getListRandomMeal()
             viewModel.getCategoriesOfMeals()
         }

@@ -15,6 +15,7 @@ import ru.webarmour.foodapp.domain.model.MealItem
 import ru.webarmour.foodapp.domain.usecase.GetCategoryOfMealsUseCase
 import ru.webarmour.foodapp.domain.usecase.GetMealByIdUseCase
 import ru.webarmour.foodapp.domain.usecase.GetMealsByCategoryUseCase
+import ru.webarmour.foodapp.domain.usecase.GetRandomMealUseCase
 import ru.webarmour.foodapp.domain.usecase.SearchMealsUseCase
 
 class MainViewModel(
@@ -23,6 +24,7 @@ class MainViewModel(
     private val categoryOfMealsUseCase: GetCategoryOfMealsUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val getMealsByCategoryUseCase: GetMealsByCategoryUseCase,
+    private val getRandomMealUseCase: GetRandomMealUseCase,
     private val mapper: MapperDtoToDomain,
     private val mapperDb: MapperDbToDomain,
 
@@ -31,38 +33,43 @@ class MainViewModel(
     private val _randomMealLiveData = MutableLiveData<MealItem>()
     val randomMealLiveData: LiveData<MealItem> = _randomMealLiveData
 
-    private val _mealByIdLiveData = MutableLiveData<MealItem>()
-    val mealByIdLiveData: LiveData<MealItem> = _mealByIdLiveData
+    private val _mealByIdLiveData = MutableLiveData<MealItem?>()
+    val mealByIdLiveData: MutableLiveData<MealItem?> = _mealByIdLiveData
 
-    private val _randomListMealLiveData = MutableLiveData<List<MealByCategory>>()
-    val randomListMealLiveData: LiveData<List<MealByCategory>> = _randomListMealLiveData
+    private val _randomListMealLiveData = MutableLiveData<List<MealByCategory>?>()
+    val randomListMealLiveData: LiveData<List<MealByCategory>?> = _randomListMealLiveData
 
-    private val _categoryItem = MutableLiveData<List<CategoryItem>>()
-    val categoryItem: LiveData<List<CategoryItem>> = _categoryItem
+    private val _categoryItem = MutableLiveData<List<CategoryItem>?>()
+    val categoryItem: MutableLiveData<List<CategoryItem>?> = _categoryItem
 
     private val _favouritesMealLiveData = database.mealDao().getAllMeals()
     val favouritesMealLiveData: LiveData<List<MealItemDb>> = _favouritesMealLiveData
 
-    private val _searchedMealLiveData = MutableLiveData<List<MealItem>>()
-    val searchedMealLiveData: LiveData<List<MealItem>> = _searchedMealLiveData
+    private val _searchedMealLiveData = MutableLiveData<List<MealItem>?>()
+    val searchedMealLiveData: MutableLiveData<List<MealItem>?> = _searchedMealLiveData
 
+    fun getRandomMeal() {
+        viewModelScope.launch {
+            _randomMealLiveData.value = getRandomMealUseCase().toList().first()
+        }
+    }
 
     fun searchMeals(searchQuery: String) {
         viewModelScope.launch {
-            searchMealUseCase(searchQuery)
+            _searchedMealLiveData.value = searchMealUseCase(searchQuery)
         }
     }
 
 
     fun getCategoriesOfMeals() {
         viewModelScope.launch {
-            categoryOfMealsUseCase()
+           _categoryItem.value = categoryOfMealsUseCase()
         }
     }
 
     fun getMealById(id: String) {
         viewModelScope.launch {
-            getMealByIdUseCase(id)
+            _mealByIdLiveData.value = getMealByIdUseCase(id)
         }
     }
 
@@ -97,7 +104,7 @@ class MainViewModel(
 
     fun getListRandomMeal() {
         viewModelScope.launch {
-            getMealsByCategoryUseCase(getRandomCategory())
+            _randomListMealLiveData.value =  getMealsByCategoryUseCase(getRandomCategory())
         }
     }
 

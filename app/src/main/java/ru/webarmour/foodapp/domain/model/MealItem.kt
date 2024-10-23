@@ -10,8 +10,8 @@ data class MealItem(
     val strImageSource: Any?,
     val strInstructions: String?,
     val strMeal: String?,
-    val strMealThumb: String,
-    val strSource: String,
+    val strMealThumb: String?,
+    val strSource: String?,
     val strTags: String?,
     val strYoutube: String?,
     val isFavourite: Boolean = false

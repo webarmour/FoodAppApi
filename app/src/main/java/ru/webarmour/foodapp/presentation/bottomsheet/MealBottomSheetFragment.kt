@@ -80,10 +80,10 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun observeMealById() {
         viewModel.mealByIdLiveData.observe(viewLifecycleOwner) {
-            Glide.with(this).load(it.strMealThumb).into(binding.imgBottomSheet)
-            binding.tvBottomSheetLocation.text = it.strArea
-            binding.tvBottomSheetCategory.text = it.strCategory
-            binding.tvMealName.text = it.strMeal
+            Glide.with(this).load(it?.strMealThumb).into(binding.imgBottomSheet)
+            binding.tvBottomSheetLocation.text = it?.strArea
+            binding.tvBottomSheetCategory.text = it?.strCategory
+            binding.tvMealName.text = it?.strMeal
         }
     }
 

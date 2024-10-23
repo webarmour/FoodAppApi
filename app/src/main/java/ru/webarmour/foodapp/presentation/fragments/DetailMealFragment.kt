@@ -98,7 +98,9 @@ class DetailMealFragment : Fragment() {
     private fun observeDetailMeal() {
         viewModel.detailMealLiveData.observe(viewLifecycleOwner) {
             currentMeal = it
-            updateUi(it)
+            if (it != null) {
+                updateUi(it)
+            }
         }
     }
 

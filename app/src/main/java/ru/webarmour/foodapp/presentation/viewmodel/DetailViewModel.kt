@@ -16,8 +16,8 @@ class DetailViewModel(
     private val mapperDb: MapperDbToDomain,
 ) : ViewModel() {
 
-    private val _detailMealLiveData = MutableLiveData<MealItem>()
-    val detailMealLiveData: LiveData<MealItem> = _detailMealLiveData
+    private val _detailMealLiveData = MutableLiveData<MealItem?>()
+    val detailMealLiveData: MutableLiveData<MealItem?> = _detailMealLiveData
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -25,7 +25,7 @@ class DetailViewModel(
     fun getDetailMealById(id: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            getMealByIdUseCase(id)
+            _detailMealLiveData.value = getMealByIdUseCase(id)
         }
     }
 
