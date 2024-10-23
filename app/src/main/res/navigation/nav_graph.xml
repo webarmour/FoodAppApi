@@ -38,12 +38,20 @@
         android:id="@+id/categoryMealFragment"
         android:name="ru.webarmour.foodapp.presentation.fragments.CategoryMealFragment"
         android:label="fragment_category_meal"
-        tools:layout="@layout/fragment_category_meal" />
+        tools:layout="@layout/fragment_category_meal" >
+        <action
+            android:id="@+id/action_categoryMealFragment_to_detailMealFragment"
+            app:destination="@id/detailMealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fullCategoriesFragment"
         android:name="ru.webarmour.foodapp.presentation.fragments.FullCategoriesFragment"
         android:label="fragment_full_categories"
-        tools:layout="@layout/fragment_full_categories" />
+        tools:layout="@layout/fragment_full_categories" >
+        <action
+            android:id="@+id/action_fullCategoriesFragment_to_categoryMealFragment"
+            app:destination="@id/categoryMealFragment" />
+    </fragment>
     <dialog
         android:id="@+id/mealBottomSheetFragment"
         android:name="ru.webarmour.foodapp.presentation.bottomsheet.MealBottomSheetFragment"

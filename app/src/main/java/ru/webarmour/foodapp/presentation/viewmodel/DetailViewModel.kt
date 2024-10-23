@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import ru.webarmour.foodapp.data.room.MapperDbToDomain
 import ru.webarmour.foodapp.data.room.MealDatabase
@@ -27,6 +28,8 @@ class DetailViewModel(
         viewModelScope.launch {
             _detailMealLiveData.value = getMealByIdUseCase(id)
         }
+        _isLoading.value = false
+
     }
 
     fun insertMeal(mealItem: MealItem) {

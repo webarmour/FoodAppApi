@@ -6,4 +6,5 @@
     <string name="popular_meals">Popular meals</string>
     <string name="meal_of_the_day">Random meal</string>
     <string name="categories_title">Categories</string>
+    <string name="meals_count">%1$s %2$s meals</string>
 </resources>

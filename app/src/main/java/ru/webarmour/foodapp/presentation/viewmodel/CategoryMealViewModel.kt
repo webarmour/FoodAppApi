@@ -15,12 +15,12 @@ class CategoryMealViewModel @Inject constructor(
     private val categoryUseCase: GetMealsByCategoryUseCase,
 ) : ViewModel() {
 
-    private val _categoryMeals = MutableLiveData<List<MealByCategory>>()
-    val categoryMeals: LiveData<List<MealByCategory>> = _categoryMeals
+    private val _categoryMeals = MutableLiveData<List<MealByCategory>?>()
+    val categoryMeals: MutableLiveData<List<MealByCategory>?> = _categoryMeals
 
     fun getMealsByCategory(category: String) {
         viewModelScope.launch {
-            categoryUseCase(category)
+            _categoryMeals.value = categoryUseCase(category)
         }
     }
 }
