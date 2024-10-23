@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ru.webarmour.foodapp.data.room.entity.MealDao
 import ru.webarmour.foodapp.data.room.entity.MealItemDb
+import javax.inject.Inject
 
 
 @Database(entities = [MealItemDb::class], version = 1)

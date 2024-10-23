@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import ru.webarmour.foodapp.R
 import ru.webarmour.foodapp.data.room.MapperDbToDomain
 import ru.webarmour.foodapp.databinding.FragmentFavouritesBinding
@@ -17,7 +18,7 @@ import ru.webarmour.foodapp.presentation.MealsAdapter
 import ru.webarmour.foodapp.presentation.fragments.HomeFragment.Companion.MEAL_ID
 import ru.webarmour.foodapp.presentation.viewmodel.MainViewModel
 
-
+@AndroidEntryPoint
 class FavouritesFragment : Fragment() {
 
     private var _binding: FragmentFavouritesBinding? = null

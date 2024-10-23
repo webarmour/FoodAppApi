@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.webarmour.foodapp.R
 import ru.webarmour.foodapp.databinding.FragmentHomeBinding
@@ -19,6 +20,7 @@ import ru.webarmour.foodapp.presentation.PopularMealAdapter
 import ru.webarmour.foodapp.presentation.bottomsheet.MealBottomSheetFragment
 import ru.webarmour.foodapp.presentation.viewmodel.MainViewModel
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -72,6 +74,7 @@ class HomeFragment : Fragment() {
 
     private fun refreshDataOnLifecycle() {
         lifecycleScope.launch {
+            viewModel.getRandomMeal()
             viewModel.getListRandomMeal()
             viewModel.getCategoriesOfMeals()
         }

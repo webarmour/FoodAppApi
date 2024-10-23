@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import ru.webarmour.foodapp.R
 import ru.webarmour.foodapp.databinding.FragmentCategoryMealBinding
 import ru.webarmour.foodapp.databinding.FragmentDetailMealBinding
@@ -17,12 +18,12 @@ import ru.webarmour.foodapp.presentation.PopularMealAdapter
 import ru.webarmour.foodapp.presentation.viewmodel.CategoryMealViewModel
 import ru.webarmour.foodapp.presentation.viewmodel.DetailViewModel
 
+@AndroidEntryPoint
 class CategoryMealFragment : Fragment() {
 
     private var _binding: FragmentCategoryMealBinding? = null
     private val binding get() = _binding!!
 
-    private var mealCategory: String? = null
     private val viewModel: CategoryMealViewModel by viewModels()
     private lateinit var mealByCategoryAdapter: MealsByCategoryAdapter
 

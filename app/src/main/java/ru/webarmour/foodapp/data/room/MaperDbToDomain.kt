@@ -18,8 +18,8 @@ class MapperDbToDomain @Inject constructor(){
         strImageSource = mealItem.strImageSource,
         strInstructions = mealItem.strInstructions,
         strMeal = mealItem.strMeal,
-        strMealThumb = mealItem.strMealThumb,
-        strSource = mealItem.strSource,
+        strMealThumb = mealItem.strMealThumb ?: "",
+        strSource = mealItem.strSource ?: "",
         strTags = mealItem.strTags,
         strYoutube = mealItem.strYoutube,
         isFavourite = mealItem.isFavourite
