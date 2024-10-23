@@ -25,7 +25,7 @@ class DetailViewModel(
 
     fun getDetailMealById(id: String) {
         _isLoading.value = true
-       val job = viewModelScope.launch {
+        viewModelScope.launch {
             _detailMealLiveData.value = getMealByIdUseCase(id)
         }
         _isLoading.value = false
