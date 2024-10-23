@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import ru.webarmour.foodapp.R
 import ru.webarmour.foodapp.databinding.FragmentCategoryMealBinding
 import ru.webarmour.foodapp.databinding.FragmentFullCategoriesBinding
 import ru.webarmour.foodapp.presentation.CategoriesAdapter
 import ru.webarmour.foodapp.presentation.viewmodel.MainViewModel
 
-
+@AndroidEntryPoint
 class FullCategoriesFragment : Fragment() {
 
     private var _binding: FragmentFullCategoriesBinding? = null

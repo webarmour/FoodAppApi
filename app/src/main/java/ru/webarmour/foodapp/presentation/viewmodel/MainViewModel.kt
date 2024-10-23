@@ -23,6 +23,8 @@ class MainViewModel(
     private val categoryOfMealsUseCase: GetCategoryOfMealsUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val getMealsByCategoryUseCase: GetMealsByCategoryUseCase,
+    private val mapper: MapperDtoToDomain,
+    private val mapperDb: MapperDbToDomain,
 
     ) : ViewModel() {
 
@@ -43,9 +45,6 @@ class MainViewModel(
 
     private val _searchedMealLiveData = MutableLiveData<List<MealItem>>()
     val searchedMealLiveData: LiveData<List<MealItem>> = _searchedMealLiveData
-
-    private val mapper = MapperDtoToDomain()
-    private val mapperDb = MapperDbToDomain()
 
 
     fun searchMeals(searchQuery: String) {

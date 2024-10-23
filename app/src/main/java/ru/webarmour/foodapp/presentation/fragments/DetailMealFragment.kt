@@ -11,13 +11,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import ru.webarmour.foodapp.MealApp
+import ru.webarmour.foodapp.data.room.MealDatabase
 import ru.webarmour.foodapp.databinding.FragmentDetailMealBinding
 import ru.webarmour.foodapp.domain.model.MealItem
 import ru.webarmour.foodapp.presentation.viewmodel.DetailViewModel
 import ru.webarmour.foodapp.presentation.viewmodel.DetailViewModelFactory
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class DetailMealFragment : Fragment() {
 
 
@@ -28,6 +31,10 @@ class DetailMealFragment : Fragment() {
     private lateinit var youTubeLink: String
     private lateinit var viewModel: DetailViewModel
     private var currentMeal:MealItem? = null
+    @Inject
+    lateinit var db: MealDatabase
+    @Inject
+    lateinit var viewModelFactory: DetailViewModelFactory
 
 
 
@@ -36,11 +43,7 @@ class DetailMealFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDetailMealBinding.inflate(inflater, container, false)
-        // Инициализация ViewModel с фабрикой
-        val db = (requireActivity().application as MealApp).mealDatabase
-        val viewModelFactory = DetailViewModelFactory(db)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(DetailViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
         return binding.root
 
     }

@@ -5,18 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.webarmour.foodapp.data.mapper.MapperDtoToDomain
 import ru.webarmour.foodapp.data.room.MapperDbToDomain
 import ru.webarmour.foodapp.data.room.MealDatabase
 import ru.webarmour.foodapp.domain.model.MealItem
 import ru.webarmour.foodapp.domain.usecase.GetMealByIdUseCase
-import javax.inject.Inject
 
-class DetailViewModel @Inject constructor(
+class DetailViewModel(
     private val mealDatabase: MealDatabase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val mapperDb: MapperDbToDomain,
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _detailMealLiveData = MutableLiveData<MealItem>()
     val detailMealLiveData: LiveData<MealItem> = _detailMealLiveData

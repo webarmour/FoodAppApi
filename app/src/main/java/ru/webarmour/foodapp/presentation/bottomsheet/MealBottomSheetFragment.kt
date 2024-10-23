@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import ru.webarmour.foodapp.R
 import ru.webarmour.foodapp.databinding.FragmentMealBottomSheetBinding
 import ru.webarmour.foodapp.presentation.fragments.HomeFragment
@@ -20,7 +21,7 @@ import ru.webarmour.foodapp.presentation.viewmodel.MainViewModel
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val MEAL_ID = "param1"
 
-
+@AndroidEntryPoint
 class MealBottomSheetFragment : BottomSheetDialogFragment() {
     private var mealId: String? = null
     private var _binding: FragmentMealBottomSheetBinding? = null

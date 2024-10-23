@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @Database(entities = [MealItemDb::class], version = 1)
 @TypeConverters(MealTypeConverter::class)
-abstract class MealDatabase @Inject constructor(): RoomDatabase() {
+abstract class MealDatabase: RoomDatabase() {
 
     abstract fun mealDao(): MealDao
 
