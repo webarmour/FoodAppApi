@@ -3,8 +3,9 @@ package ru.webarmour.foodapp.data.room
 import androidx.lifecycle.LiveData
 import ru.webarmour.foodapp.data.room.entity.MealItemDb
 import ru.webarmour.foodapp.domain.model.MealItem
+import javax.inject.Inject
 
-class MapperDbToDomain {
+class MapperDbToDomain @Inject constructor(){
 
 
     fun mapDomainItemToDbItem(mealItem: MealItem) = MealItemDb(
