@@ -102,8 +102,7 @@ class FavouritesFragment : Fragment() {
 
     private fun observeFavouritesMeals() {
         viewModel.favouritesMealLiveData.observe(viewLifecycleOwner) {
-            var mealList = mapperDbToDomain.mapListDbToDomain(it).toMutableList()
-            adapter.submitList(mealList)
+            adapter.submitList(it)
         }
     }
 

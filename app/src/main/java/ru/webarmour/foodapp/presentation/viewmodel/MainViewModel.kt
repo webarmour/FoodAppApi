@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.webarmour.foodapp.data.mapper.MapperDtoToDomain
 import ru.webarmour.foodapp.data.room.MapperDbToDomain
@@ -12,21 +13,24 @@ import ru.webarmour.foodapp.data.room.entity.MealItemDb
 import ru.webarmour.foodapp.domain.model.CategoryItem
 import ru.webarmour.foodapp.domain.model.MealByCategory
 import ru.webarmour.foodapp.domain.model.MealItem
+import ru.webarmour.foodapp.domain.usecase.DeleteMealFromDbUseCase
+import ru.webarmour.foodapp.domain.usecase.GetAllMealsFromDbUseCase
 import ru.webarmour.foodapp.domain.usecase.GetCategoryOfMealsUseCase
 import ru.webarmour.foodapp.domain.usecase.GetMealByIdUseCase
 import ru.webarmour.foodapp.domain.usecase.GetMealsByCategoryUseCase
 import ru.webarmour.foodapp.domain.usecase.GetRandomMealUseCase
+import ru.webarmour.foodapp.domain.usecase.InsertItemAndUpdateDbUseCase
 import ru.webarmour.foodapp.domain.usecase.SearchMealsUseCase
 
 class MainViewModel(
-    private val database: MealDatabase,
     private val searchMealUseCase: SearchMealsUseCase,
     private val categoryOfMealsUseCase: GetCategoryOfMealsUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val getMealsByCategoryUseCase: GetMealsByCategoryUseCase,
     private val getRandomMealUseCase: GetRandomMealUseCase,
-    private val mapper: MapperDtoToDomain,
-    private val mapperDb: MapperDbToDomain,
+    private val deleteMealFromDbUseCase: DeleteMealFromDbUseCase,
+    private val getAllMealsFromDbUseCase: GetAllMealsFromDbUseCase,
+    private val insertItemAndUpdateDbUseCase: InsertItemAndUpdateDbUseCase
 
     ) : ViewModel() {
 
@@ -42,8 +46,8 @@ class MainViewModel(
     private val _categoryItem = MutableLiveData<List<CategoryItem>?>()
     val categoryItem: MutableLiveData<List<CategoryItem>?> = _categoryItem
 
-    private val _favouritesMealLiveData = database.mealDao().getAllMeals()
-    val favouritesMealLiveData: LiveData<List<MealItemDb>> = _favouritesMealLiveData
+    private val _favouritesMealLiveData = getAllMealsFromDbUseCase()
+    val favouritesMealLiveData: LiveData<List<MealItem>> = _favouritesMealLiveData
 
     private val _searchedMealLiveData = MutableLiveData<List<MealItem>?>()
     val searchedMealLiveData: MutableLiveData<List<MealItem>?> = _searchedMealLiveData
@@ -75,13 +79,13 @@ class MainViewModel(
 
     fun deleteMeal(mealItem: MealItem) {
         viewModelScope.launch {
-            database.mealDao().delete(mapperDb.mapDomainItemToDbItem(mealItem))
+            deleteMealFromDbUseCase(mealItem)
         }
     }
 
     fun insertMeal(mealItem: MealItem) {
         viewModelScope.launch {
-            database.mealDao().insertAndUpdateMeal(mapperDb.mapDomainItemToDbItem(mealItem))
+            insertItemAndUpdateDbUseCase(mealItem)
         }
     }
 
